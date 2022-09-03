@@ -2,18 +2,19 @@
 
 namespace KodlamaIoDevs.Domain.Entities
 {
-    public class Brand: Entity
+    public class ProgrammingLanguage: Entity
     {
         public string Name { get; set; }
 
-        public Brand()
+        public ProgrammingLanguage()
         {
         }
 
-        public Brand(int id, string name) : this()
+        public ProgrammingLanguage(int id, string name) : this()
         {
             Id = id;
             Name = name;
         }
     }
 }
+

@@ -21,7 +21,7 @@ namespace KodlamaIoDevs.Persistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("KodlamaIoDevs.Domain.Entities.Brand", b =>
+            modelBuilder.Entity("KodlamaIoDevs.Domain.Entities.ProgrammingLanguage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,18 +37,18 @@ namespace KodlamaIoDevs.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("ProgrammingLanguages", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Name = "Tofaş"
+                            Name = "Delphi"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Toros"
+                            Name = "Pascal"
                         });
                 });
 #pragma warning restore 612, 618

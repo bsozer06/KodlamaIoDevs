@@ -5,9 +5,9 @@ using KodlamaIoDevs.Persistance.Contexts;
 
 namespace KodlamaIoDevs.Persistance.Repositories
 {
-    public class BrandsRepository : EfRepositoryBase<Brand, BaseDbContext>, IBrandRepository
+    public class ProgrammingLanguagesRepository : EfRepositoryBase<ProgrammingLanguage, BaseDbContext>, IProgrammingLanguageRepository
     {
-        public BrandsRepository(BaseDbContext context) : base(context)
+        public ProgrammingLanguagesRepository(BaseDbContext context) : base(context)
         {
         }
     }

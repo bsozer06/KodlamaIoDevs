@@ -4,12 +4,12 @@
 
 namespace KodlamaIoDevs.Persistance.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Brands",
+                name: "ProgrammingLanguages",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -18,24 +18,24 @@ namespace KodlamaIoDevs.Persistance.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Brands", x => x.Id);
+                    table.PrimaryKey("PK_ProgrammingLanguages", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
-                table: "Brands",
+                table: "ProgrammingLanguages",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "Tofaş" });
+                values: new object[] { 1, "Delphi" });
 
             migrationBuilder.InsertData(
-                table: "Brands",
+                table: "ProgrammingLanguages",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 2, "Toros" });
+                values: new object[] { 2, "Pascal" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Brands");
+                name: "ProgrammingLanguages");
         }
     }
 }

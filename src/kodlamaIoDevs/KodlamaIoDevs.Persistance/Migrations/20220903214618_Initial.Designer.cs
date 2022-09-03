@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KodlamaIoDevs.Persistance.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20220903212911_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220903214618_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace KodlamaIoDevs.Persistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("KodlamaIoDevs.Domain.Entities.Brand", b =>
+            modelBuilder.Entity("KodlamaIoDevs.Domain.Entities.ProgrammingLanguage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,18 +39,18 @@ namespace KodlamaIoDevs.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("ProgrammingLanguages", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Name = "Tofaş"
+                            Name = "Delphi"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Toros"
+                            Name = "Pascal"
                         });
                 });
 #pragma warning restore 612, 618

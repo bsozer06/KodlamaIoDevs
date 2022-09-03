@@ -16,23 +16,23 @@ namespace KodlamaIoDevs.Persistance.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Brand>(a =>
+            modelBuilder.Entity<ProgrammingLanguage>(a =>
             {
-                a.ToTable("Brands").HasKey(k => k.Id);
+                a.ToTable("ProgrammingLanguages").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
                 a.Property(p => p.Name).HasColumnName("Name");
             });
 
             /// Seeding data
-            Brand[] brandEntitySeeds = {
-                new(1, "Tofaş"),
-                new(2, "Toros")
+            ProgrammingLanguage[] brandEntitySeeds = {
+                new(1, "Delphi"),
+                new(2, "Pascal")
             };
-            modelBuilder.Entity<Brand>().HasData(brandEntitySeeds);
+            modelBuilder.Entity<ProgrammingLanguage>().HasData(brandEntitySeeds);
         }
 
 
-        public DbSet<Brand> Brands { get; set; }
+        public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
 
     }
 }

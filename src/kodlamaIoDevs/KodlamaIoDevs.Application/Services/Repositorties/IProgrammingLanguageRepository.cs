@@ -3,7 +3,7 @@ using KodlamaIoDevs.Domain.Entities;
 
 namespace KodlamaIoDevs.Application.Services.Repositorties
 {
-    public interface IBrandRepository : IAsyncRepository<Brand>, IRepository<Brand>
+    public interface IProgrammingLanguageRepository : IAsyncRepository<ProgrammingLanguage>, IRepository<ProgrammingLanguage>
     {
     }
 }
