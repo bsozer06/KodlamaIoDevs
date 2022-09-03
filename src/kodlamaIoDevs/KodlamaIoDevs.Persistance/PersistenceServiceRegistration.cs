@@ -13,7 +13,7 @@ namespace KodlamaIoDevs.Persistance
         {
             services.AddDbContext<BaseDbContext>(options =>
                                                      options.UseSqlServer(
-                                                         configuration.GetConnectionString("RentACarCampConnectionString")));
+                                                         configuration.GetConnectionString("KodlamaIoDevsConnectionString")));
 
             services.AddScoped<IBrandRepository, BrandsRepository>();
 

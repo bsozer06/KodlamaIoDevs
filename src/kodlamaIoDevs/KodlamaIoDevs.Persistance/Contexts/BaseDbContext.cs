@@ -8,16 +8,11 @@ namespace KodlamaIoDevs.Persistance.Contexts
     {
         protected IConfiguration Configuration { get; set; }
 
-        public BaseDbContext(IConfiguration configuration)
+        public BaseDbContext(IConfiguration configuration, DbContextOptions dbContextOptions): base(dbContextOptions)
         {
             Configuration = configuration;
         }
 
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
