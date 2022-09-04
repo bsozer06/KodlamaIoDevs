@@ -17,7 +17,7 @@ Queries in the my file directory:
   * GetByIdProgrammingLanguage
   * GetListProgrammingLanguage
   
- In addition, the bussiness rules defined in the different file because of the Single Responsibility Pattern. 
+ In addition, the bussiness rules was defined in the different file because of the Single Responsibility Pattern. 
 
 
 AutoMapper package is used for mapping among models.
