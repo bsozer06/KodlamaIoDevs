@@ -1,4 +1,6 @@
 ﻿using Core.Application.Requests;
+using KodlamaIoDevs.Application.Features.ProgrammingLanguage.Commands.CreateProgramingLanguage;
+using KodlamaIoDevs.Application.Features.ProgrammingLanguage.Commands.UpdateProgramingLanguage;
 using KodlamaIoDevs.Application.Features.ProgrammingLanguage.Queries.GetByIdProgrammingLanguage;
 using KodlamaIoDevs.Application.Features.ProgrammingLanguage.Queries.GetListProgrammingLanguage;
 using Microsoft.AspNetCore.Http;
@@ -25,5 +27,21 @@ namespace KodlamaIoDevs.WebAPI.Controllers
             var result = await Mediator.Send(getByIdProgrammingLanguageQuery);
             return Ok(result);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] CreateProgrammingLanguageCommand createProgrammingLanguageCommand)
+        {
+            var result = await Mediator.Send(createProgrammingLanguageCommand);
+            return Created("", result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateProgrammingLanguageCommand updateProgrammingLanguageCommand)
+        {
+            var result = await Mediator.Send(updateProgrammingLanguageCommand);
+            return NoContent();
+        }
+
     }
 }
