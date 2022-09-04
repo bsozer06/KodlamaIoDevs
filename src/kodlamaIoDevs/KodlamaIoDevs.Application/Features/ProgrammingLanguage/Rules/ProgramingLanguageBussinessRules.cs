@@ -1,4 +1,5 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions;
+using KodlamaIoDevs.Application.Features.ProgrammingLanguage.Constants;
 using KodlamaIoDevs.Application.Services.Repositorties;
 
 namespace KodlamaIoDevs.Application.Features.ProgrammingLanguage.Rules
@@ -15,7 +16,7 @@ namespace KodlamaIoDevs.Application.Features.ProgrammingLanguage.Rules
         public void ProgrammingLanguageExistWhenRequested(Domain.Entities.ProgrammingLanguage programmingLanguage)
         {
             if (programmingLanguage == null)
-                throw new BusinessException("Requested programming language does not exist!");
+                throw new BusinessException(BusinessRulesConstants.ProgrammingLanguageNotExist);
         }
 
         public async Task ProgrammingLanguageNameCanNotBeDuplicatedWhenInserted(string name)
@@ -23,7 +24,7 @@ namespace KodlamaIoDevs.Application.Features.ProgrammingLanguage.Rules
             var result = await _programmingLanguageRepository.GetListAsync(x => x.Name == name);
 
             if (result.Items.Any())
-                throw new BusinessException("Programming language name exists.");
+                throw new BusinessException(BusinessRulesConstants.ProgrammingLanguageExistsBefore);
         }
     }
 }

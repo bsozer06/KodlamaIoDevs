@@ -13,6 +13,9 @@ namespace KodlamaIoDevs.Application.Features.ProgrammingLanguage.Commands.Update
         {
             RuleFor(c => c.Name)
                 .NotEmpty();
+
+            RuleFor(c => c.Id)
+                .NotEmpty();
         }
     }
 }
