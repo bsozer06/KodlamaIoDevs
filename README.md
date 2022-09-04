@@ -22,5 +22,6 @@ Queries in the my file directory:
 
 AutoMapper package is used for mapping among models.
 
-
+# File Directory of the Application layer
+![Screenshot_1](https://user-images.githubusercontent.com/56292618/188316588-faf3c6f0-aad4-462d-912a-0f6c5f3b0ead.png)
 
