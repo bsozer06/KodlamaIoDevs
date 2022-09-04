@@ -20,7 +20,7 @@ namespace KodlamaIoDevs.Application.Features.ProgrammingLanguage.Profiles
             CreateMap<IPaginate<Domain.Entities.ProgrammingLanguage>, ProgrammingLanguageListModel>();
             CreateMap<Domain.Entities.ProgrammingLanguage, ProgrammingLanguageDto>().ReverseMap();
 
-            //CreateMap<Brand, BrandGetByIdDto>().ReverseMap();
+            CreateMap<Domain.Entities.ProgrammingLanguage, ProgrammingLanguageGetByIdDto>().ReverseMap();
 
         }
     }

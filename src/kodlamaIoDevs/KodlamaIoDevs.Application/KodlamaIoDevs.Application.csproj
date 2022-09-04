@@ -9,8 +9,6 @@
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguage\Commands\CreateProgramingLanguageCommand\" />
     <Folder Include="Features\ProgrammingLanguage\Constants\" />
-    <Folder Include="Features\ProgrammingLanguage\Queries\GetByIdProgrammingLanguage\" />
-    <Folder Include="Features\ProgrammingLanguage\Rules\" />
   </ItemGroup>
 
   <ItemGroup>
