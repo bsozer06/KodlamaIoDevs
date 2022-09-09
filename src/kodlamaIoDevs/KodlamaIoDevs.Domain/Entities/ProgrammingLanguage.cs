@@ -4,7 +4,7 @@ namespace KodlamaIoDevs.Domain.Entities
 {
     public class ProgrammingLanguage: Entity
     {
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         public ProgrammingLanguage()
         {
