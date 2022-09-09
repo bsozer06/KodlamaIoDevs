@@ -19,4 +19,9 @@
     <ProjectReference Include="..\KodlamaIoDevs.Domain\KodlamaIoDevs.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Technology\Rules\" />
+    <Folder Include="Features\Technology\Commands\" />
+  </ItemGroup>
+
 </Project>
