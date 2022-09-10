@@ -1,6 +1,6 @@
 ﻿namespace KodlamaIoDevs.Application.Features.Technology.Dtos
 {
-    public class CreatedTechnologyDto
+    public class DeletedTechnologyDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
