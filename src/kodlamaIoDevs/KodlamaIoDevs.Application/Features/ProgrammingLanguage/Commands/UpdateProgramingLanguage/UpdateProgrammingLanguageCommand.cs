@@ -29,7 +29,7 @@ namespace KodlamaIoDevs.Application.Features.ProgrammingLanguage.Commands.Update
                 await _programingLanguageBussinessRules.ProgrammingLanguageNameCanNotBeDuplicatedWhenInserted(request.Name);
 
                 var mappedProgrammingLanguageEntitiy = _mapper.Map<Domain.Entities.ProgrammingLanguage>(request);
-                var updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(mappedProgrammingLanguageEntitiy);
+                var updatedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(mappedProgrammingLanguageEntitiy);
                 var updatedProgrammingLanguageDto = _mapper.Map<UpdatedProgrammingLanguageDto>(updatedProgrammingLanguage);
 
                 return updatedProgrammingLanguageDto;

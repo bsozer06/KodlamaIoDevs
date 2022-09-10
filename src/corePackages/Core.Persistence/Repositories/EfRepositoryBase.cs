@@ -74,19 +74,13 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return entity;
     }
 
-    public async Task<TEntity> UpdateAsync(TEntity entity)
+    public async Task<TEntity> DeleteAsync(TEntity entity)
     {
         Context.Entry(entity).State = EntityState.Modified;
         await Context.SaveChangesAsync();
         return entity;
     }
 
-    public async Task<TEntity> DeleteAsync(TEntity entity)
-    {
-        Context.Entry(entity).State = EntityState.Deleted;
-        await Context.SaveChangesAsync();
-        return entity;
-    }
 
     public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
     {

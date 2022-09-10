@@ -30,7 +30,7 @@ namespace KodlamaIoDevs.Application.Features.Technology.Commands.UpdateTechnolog
             _technologyBusinessRules.TechnologyShouldExistWhenRequested(technologyEntity);
 
             Domain.Entities.Technology? mappedTechnologyEntitiy = _mapper.Map<Domain.Entities.Technology>(request);
-            var updatedTechnologyEntity = await _technologyRepository.UpdateAsync(mappedTechnologyEntitiy);
+            var updatedTechnologyEntity = await _technologyRepository.DeleteAsync(mappedTechnologyEntitiy);
             var updatedTechnologyDto = _mapper.Map<UpdatedTechnologyDto>(updatedTechnologyEntity);
 
             return updatedTechnologyDto;
