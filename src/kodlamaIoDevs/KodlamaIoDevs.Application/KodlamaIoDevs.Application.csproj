@@ -20,11 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\User\Commands\" />
-    <Folder Include="Features\User\Dtos\" />
-    <Folder Include="Features\User\Rules\" />
-    <Folder Include="Features\User\Queries\" />
-    <Folder Include="Features\User\Profiles\" />
+    <Folder Include="Features\SocialMedia\" />
+    <Folder Include="Features\UserApp\Commands\LoginUserApp\" />
+    <Folder Include="Features\UserApp\Queries\" />
   </ItemGroup>
 
 </Project>
