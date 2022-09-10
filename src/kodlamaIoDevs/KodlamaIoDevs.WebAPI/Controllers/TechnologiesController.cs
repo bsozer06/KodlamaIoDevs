@@ -1,10 +1,13 @@
 ﻿using Core.Application.Requests;
 using KodlamaIoDevs.Application.Features.Technology.Commands.CreateTechnology;
+using KodlamaIoDevs.Application.Features.Technology.Commands.UpdateTechnology;
 using KodlamaIoDevs.Application.Features.Technology.Queries.GetListTecnology;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KodlamaIoDevs.WebAPI.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class TechnologiesController: BaseController
     {
         [HttpGet(nameof(GetList))]
@@ -20,6 +23,13 @@ namespace KodlamaIoDevs.WebAPI.Controllers
         {
             var result = await Mediator!.Send(createTechnologyCommand);
             return Created("", result);
+        }
+
+        [HttpPut(nameof(Update))]
+        public async Task<IActionResult> Update([FromBody] UpdateTechnologyCommand updateTechnologyCommand)
+        {
+            var result = await Mediator!.Send(updateTechnologyCommand);
+            return NoContent();
         }
     }
 }

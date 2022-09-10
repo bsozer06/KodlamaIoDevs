@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Persistence.Paging;
 using KodlamaIoDevs.Application.Features.Technology.Commands.CreateTechnology;
+using KodlamaIoDevs.Application.Features.Technology.Commands.UpdateTechnology;
 using KodlamaIoDevs.Application.Features.Technology.Dtos;
 using KodlamaIoDevs.Application.Features.Technology.Models;
 
@@ -20,6 +21,11 @@ namespace KodlamaIoDevs.Application.Features.Technology.Profiles
             // Create
             CreateMap<Domain.Entities.Technology, CreatedTechnologyDto>().ReverseMap();
             CreateMap<Domain.Entities.Technology, CreateTechnologyCommand>().ReverseMap();
+
+            // Update
+            CreateMap<Domain.Entities.Technology, UpdatedTechnologyDto>().ReverseMap();
+            CreateMap<Domain.Entities.Technology, UpdateTechnologyCommand>().ReverseMap();
+
         }
     }
 }

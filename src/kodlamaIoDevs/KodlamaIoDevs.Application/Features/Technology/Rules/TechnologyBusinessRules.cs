@@ -31,5 +31,18 @@ namespace KodlamaIoDevs.Application.Features.Technology.Rules
                 throw new BusinessException("ProgrammingLanguage Id is not found!");
         }
 
+        public async Task ShouldHaveValidId(int technologyId)
+        {
+            Domain.Entities.Technology? result = await _technologyRepository.GetAsync(p => p.Id == technologyId);
+
+            if (result == null)
+                throw new BusinessException("Technology's Id is not found!");
+        }
+
+        public void TechnologyShouldExistWhenRequested(Domain.Entities.Technology? technology)
+        {
+            if (technology == null) throw new BusinessException("Requested technology does not exists");
+        }
+
     }
 }
