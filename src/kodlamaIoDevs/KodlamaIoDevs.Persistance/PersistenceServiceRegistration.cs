@@ -17,6 +17,11 @@ namespace KodlamaIoDevs.Persistance
 
             services.AddScoped<IProgrammingLanguageRepository, ProgrammingLanguagesRepository>();
             services.AddScoped<ITechnologyRepository, TechnologyRepository>();
+            services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
+            services.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
+            services.AddScoped<IUserAppRepository, UserAppRepository>();
+            services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
