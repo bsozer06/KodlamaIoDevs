@@ -1,4 +1,5 @@
-﻿using KodlamaIoDevs.Domain.Entities;
+﻿using Core.Security.Entities;
+using KodlamaIoDevs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -35,7 +36,6 @@ namespace KodlamaIoDevs.Persistance.Contexts
 
             #endregion
 
-
             #region Technology
 
             modelBuilder.Entity<Technology>(t =>
@@ -56,11 +56,84 @@ namespace KodlamaIoDevs.Persistance.Contexts
 
             #endregion
 
+            #region UserApp
+
+            modelBuilder.Entity<UserApp>(u =>
+            {
+                u.ToTable("UserApp");
+                u.HasMany(p => p.SocialMedias);
+            });
+
+            #endregion
+
+            #region SocialMedia
+
+            modelBuilder.Entity<SocialMedia>(s =>
+            {
+                s.ToTable("SocialMedia");
+                s.Property(p => p.Id).HasColumnName("Id");
+                s.Property(p => p.UserId).HasColumnName("UserId");
+                s.Property(p => p.Url).HasColumnName("Url");
+                s.HasOne(p => p.UserApp);
+            });
+
+            #endregion
+
+            #region User
+
+            modelBuilder.Entity<User>(u =>
+            {
+                u.ToTable("Users").HasKey(k => k.Id);
+                u.Property(p => p.Id).HasColumnName("Id");
+                u.Property(p => p.FirstName).HasColumnName("FirstName");
+                u.Property(p => p.LastName).HasColumnName("LastName");
+                u.Property(p => p.Email).HasColumnName("Email");
+                u.Property(p => p.PasswordHash).HasColumnName("PasswordHash");
+                u.Property(p => p.PasswordSalt).HasColumnName("PasswordSalt");
+                u.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
+                u.Property(p => p.AuthenticatorType).HasColumnName("AuthenticatorType");
+
+                u.HasMany(p => p.UserOperationClaims);
+                u.HasMany(p => p.RefreshTokens);
+            });
+
+            #endregion
+
+            #region UserOperationClaims
+
+            modelBuilder.Entity<UserOperationClaim>(u =>
+            {
+                u.ToTable("UserOperationClaims").HasKey(k => k.Id);
+                u.Property(p => p.Id).HasColumnName("Id");
+                u.Property(p => p.UserId).HasColumnName("UserId");
+                u.Property(p => p.OperationClaimId).HasColumnName("OperationClaimId");
+                u.HasOne(p => p.OperationClaim);
+                u.HasOne(p => p.User);
+            });
+
+            #endregion
+
+            #region OperationClaim
+
+            modelBuilder.Entity<OperationClaim>(o =>
+            {
+               o.ToTable("OperationClaims").HasKey(k => k.Id);
+               o.Property(p => p.Id).HasColumnName("Id");
+               o.Property(p => p.Name).HasColumnName("Name");
+            });
+
+            #endregion
+
         }
 
 
         public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
         public DbSet<Technology> Technologies { get; set; }
+        public DbSet<UserApp> UserApps { get; set; }
+        public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
     }
 }
