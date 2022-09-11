@@ -21,8 +21,7 @@ namespace KodlamaIoDevs.Application.Features.Technology.Commands.DeleteTechnolog
 
         public async Task<DeletedTechnologyDto> Handle(DeleteTechnologyCommand request, CancellationToken cancellationToken)
         {
-            var technologyEntity = await _technologyRepository.GetAsync(x => x.Id == request.Id);
-            _technologyBusinessRules.TechnologyShouldExistWhenRequested(technologyEntity);
+            Domain.Entities.Technology? technologyEntity = await _technologyRepository.GetAsync(x => x.Id == request.Id);
 
             var deletedTechnologyEntity = await _technologyRepository.DeleteAsync(technologyEntity);
 

@@ -28,7 +28,7 @@ namespace KodlamaIoDevs.Application.Features.SocialMedia.Profiles
             CreateMap<SocialMediaListModel, IPaginate<Domain.Entities.SocialMedia>>().ReverseMap();
             CreateMap<Domain.Entities.SocialMedia, SocialMediaListDto>()
                 .ForMember(dest => dest.DeveloperFullName, src => 
-                    src.MapFrom(c => c.UserApp.FirstName + " " + c.UserApp.LastName)).ReverseMap();
+                    src.MapFrom(c => c.User.FirstName + " " + c.User.LastName)).ReverseMap();
         }
     }
 }

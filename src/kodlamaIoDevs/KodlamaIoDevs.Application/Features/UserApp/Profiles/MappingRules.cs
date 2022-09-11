@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Security.Entities;
 using Core.Security.JWT;
 using KodlamaIoDevs.Application.Features.UserApp.Commands.RegisterUserApp;
 using KodlamaIoDevs.Application.Features.UserApp.Dtos;
@@ -9,7 +10,7 @@ namespace KodlamaIoDevs.Application.Features.UserApp.Profiles
     {
         public MappingRules()
         {
-            CreateMap<Domain.Entities.UserApp, RegisterUserAppCommand>().ReverseMap();
+            CreateMap<User, RegisterUserAppCommand>().ReverseMap();
             CreateMap<TokenDto, AccessToken>().ReverseMap();
         }
     }

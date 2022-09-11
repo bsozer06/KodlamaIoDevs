@@ -21,12 +21,13 @@ namespace KodlamaIoDevs.Application.Features.SocialMedia.Commands.UpdateSocialMe
 
         public async Task<UpdatedSocialMediaDto> Handle(UpdateSocialMediaCommand request, CancellationToken cancellationToken)
         {
+            //_socialMediaBussinessRules.SocialMediaCanNotBeDuplicatedWhenInserted(request.UserId, request.Url);
 
             var socialMediaEntity = _mapper.Map<Domain.Entities.SocialMedia>(request);
             _socialMediaBussinessRules.SocialMediaShouldExistWhenUpdated(socialMediaEntity);
 
 
-            socialMediaEntity = await _socialMediaRepository.DeleteAsync(socialMediaEntity);
+            socialMediaEntity = _socialMediaRepository.Update(socialMediaEntity);
 
             var updatedSocialMediaDto = _mapper.Map<UpdatedSocialMediaDto>(socialMediaEntity);
 

@@ -19,18 +19,20 @@ namespace KodlamaIoDevs.Application.Features.Technology.Commands.UpdateTechnolog
             _technologyRepository = technologyRepository;
         }
 
+        /// Todo: Update trace id hatası veriyor. Bakılacak !
         public async Task<UpdatedTechnologyDto> Handle(UpdateTechnologyCommand request, CancellationToken cancellationToken)
         {
             await _technologyBusinessRules.NameCanNotBeDuplicatedWhenInserted(request.Name);
             await _technologyBusinessRules.ShouldHaveValidForeignKey(request.ProgrammingLanguageId);
             await _technologyBusinessRules.ShouldHaveValidId(request.Id);
 
-            var technologyEntity = await _technologyRepository.GetAsync(t => t.Id == request.Id);
-
-            _technologyBusinessRules.TechnologyShouldExistWhenRequested(technologyEntity);
-
             Domain.Entities.Technology? mappedTechnologyEntitiy = _mapper.Map<Domain.Entities.Technology>(request);
-            var updatedTechnologyEntity = await _technologyRepository.DeleteAsync(mappedTechnologyEntitiy);
+            //var technologyEntity = await _technologyRepository.GetAsync(t => t.Id == request.Id);
+
+            _technologyBusinessRules.TechnologyShouldExistWhenRequested(mappedTechnologyEntitiy);
+
+            //var updatedTechnologyEntity = await _technologyRepository.DeleteAsync(technologyEntity);
+            var updatedTechnologyEntity = _technologyRepository.Update(mappedTechnologyEntitiy);
             var updatedTechnologyDto = _mapper.Map<UpdatedTechnologyDto>(updatedTechnologyEntity);
 
             return updatedTechnologyDto;

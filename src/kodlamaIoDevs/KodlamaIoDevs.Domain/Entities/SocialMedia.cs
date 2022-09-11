@@ -1,4 +1,5 @@
 ﻿using Core.Persistence.Repositories;
+using Core.Security.Entities;
 
 namespace KodlamaIoDevs.Domain.Entities
 {
@@ -6,7 +7,7 @@ namespace KodlamaIoDevs.Domain.Entities
     {
         public string Url { get; set; }
         public int UserId { get; set; }
-        public virtual UserApp? UserApp { get; set; }
+        public virtual User? User { get; set; }
 
         public SocialMedia()
         {

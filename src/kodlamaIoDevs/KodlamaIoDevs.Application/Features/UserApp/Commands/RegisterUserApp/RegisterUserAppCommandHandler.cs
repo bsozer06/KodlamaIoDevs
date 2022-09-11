@@ -10,11 +10,11 @@ namespace KodlamaIoDevs.Application.Features.UserApp.Commands.RegisterUserApp
 {
     public class RegisterUserAppCommandHandler : IRequestHandler<RegisterUserAppCommand, TokenDto>
     {
-        private readonly IUserAppRepository _userAppRepository;
+        private readonly IUserRepository _userAppRepository;
         private readonly IMapper _mapper;
         private readonly ITokenHelper _tokenHelper;
 
-        public RegisterUserAppCommandHandler(IUserAppRepository userAppRepository, IMapper mapper, ITokenHelper tokenHelper)
+        public RegisterUserAppCommandHandler(IUserRepository userAppRepository, IMapper mapper, ITokenHelper tokenHelper)
         {
             _userAppRepository = userAppRepository;
             _mapper = mapper;
@@ -26,7 +26,7 @@ namespace KodlamaIoDevs.Application.Features.UserApp.Commands.RegisterUserApp
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
 
-            var userAppEntity = _mapper.Map<Domain.Entities.UserApp>(request);
+            var userAppEntity = _mapper.Map<User>(request);
             userAppEntity.PasswordHash = passwordHash;
             userAppEntity.PasswordSalt = passwordSalt;
             //(userAppEntity.PasswordHash, userAppEntity.PasswordSalt) = (passwordHash, passwordSalt);

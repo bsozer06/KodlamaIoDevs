@@ -5,11 +5,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace KodlamaIoDevs.Persistance.Contexts
 {
-    public class BaseDbContext: DbContext
+    public class BaseDbContext : DbContext
     {
         protected IConfiguration Configuration { get; set; }
 
-        public BaseDbContext(IConfiguration configuration, DbContextOptions dbContextOptions): base(dbContextOptions)
+        public BaseDbContext(IConfiguration configuration, DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
             Configuration = configuration;
         }
@@ -54,17 +54,7 @@ namespace KodlamaIoDevs.Persistance.Contexts
             };
             modelBuilder.Entity<Technology>().HasData(technologyEntitySeeds);
 
-            #endregion
-
-            #region UserApp
-
-            modelBuilder.Entity<UserApp>(u =>
-            {
-                u.ToTable("UserApp");
-                u.HasMany(p => p.SocialMedias);
-            });
-
-            #endregion
+            #endregion  
 
             #region SocialMedia
 
@@ -74,7 +64,7 @@ namespace KodlamaIoDevs.Persistance.Contexts
                 s.Property(p => p.Id).HasColumnName("Id");
                 s.Property(p => p.UserId).HasColumnName("UserId");
                 s.Property(p => p.Url).HasColumnName("Url");
-                s.HasOne(p => p.UserApp);
+                s.HasOne(p => p.User);
             });
 
             #endregion
@@ -117,23 +107,28 @@ namespace KodlamaIoDevs.Persistance.Contexts
 
             modelBuilder.Entity<OperationClaim>(o =>
             {
-               o.ToTable("OperationClaims").HasKey(k => k.Id);
-               o.Property(p => p.Id).HasColumnName("Id");
-               o.Property(p => p.Name).HasColumnName("Name");
+                o.ToTable("OperationClaims").HasKey(k => k.Id);
+                o.Property(p => p.Id).HasColumnName("Id");
+                o.Property(p => p.Name).HasColumnName("Name");
             });
+
+            OperationClaim[] operationClaimsEntitySeeds = {
+                new(1, "Admin"),
+                new(2, "User")
+            };
+            modelBuilder.Entity<OperationClaim>().HasData(operationClaimsEntitySeeds);
 
             #endregion
 
         }
 
-
-        public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
-        public DbSet<Technology> Technologies { get; set; }
-        public DbSet<UserApp> UserApps { get; set; }
-        public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+        public DbSet<Technology> Technologies { get; set; }
+        public DbSet<SocialMedia> SocialMedias { get; set; }
+        
 
     }
 }

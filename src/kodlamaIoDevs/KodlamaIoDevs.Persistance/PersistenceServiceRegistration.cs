@@ -12,14 +12,16 @@ namespace KodlamaIoDevs.Persistance
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<BaseDbContext>(options =>
-                                                     options.UseSqlServer(
-                                                         configuration.GetConnectionString("KodlamaIoDevsConnectionString")));
+            {
+                options.UseSqlServer(configuration.GetConnectionString("KodlamaIoDevsConnectionString"));
+                options.EnableSensitiveDataLogging();
+            });
 
             services.AddScoped<IProgrammingLanguageRepository, ProgrammingLanguagesRepository>();
             services.AddScoped<ITechnologyRepository, TechnologyRepository>();
             services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
             services.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
-            services.AddScoped<IUserAppRepository, UserAppRepository>();
+            //services.AddScoped<IUserAppRepository, UserAppRepository>();
             services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 

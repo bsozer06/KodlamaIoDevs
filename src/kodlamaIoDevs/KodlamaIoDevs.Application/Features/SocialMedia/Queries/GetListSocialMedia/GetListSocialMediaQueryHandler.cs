@@ -23,7 +23,7 @@ namespace KodlamaIoDevs.Application.Features.SocialMedia.Queries.GetListSocialMe
             IPaginate<Domain.Entities.SocialMedia> socialMediaEntity = await _socialMediaRepository.GetListAsync(
               index: request.PageRequest.Page,
               size: request.PageRequest.PageSize,
-              include: m => m.Include(m => m.UserApp)
+              include: m => m.Include(m => m.User)
               );
             var socialMediaListModel = _mapper.Map<SocialMediaListModel>(socialMediaEntity);
 

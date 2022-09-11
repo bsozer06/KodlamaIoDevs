@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KodlamaIoDevs.Persistance.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20220910175914_AddUserSocialMediaTables")]
-    partial class AddUserSocialMediaTables
+    [Migration("20220911123758_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,18 @@ namespace KodlamaIoDevs.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OperationClaims", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "User"
+                        });
                 });
 
             modelBuilder.Entity("Core.Security.Entities.RefreshToken", b =>
@@ -207,16 +219,13 @@ namespace KodlamaIoDevs.Persistance.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Url");
 
-                    b.Property<int?>("UserAppId")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserAppId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("SocialMedia", (string)null);
                 });
@@ -266,13 +275,6 @@ namespace KodlamaIoDevs.Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("KodlamaIoDevs.Domain.Entities.UserApp", b =>
-                {
-                    b.HasBaseType("Core.Security.Entities.User");
-
-                    b.ToTable("UserApp", (string)null);
-                });
-
             modelBuilder.Entity("Core.Security.Entities.RefreshToken", b =>
                 {
                     b.HasOne("Core.Security.Entities.User", "User")
@@ -305,11 +307,13 @@ namespace KodlamaIoDevs.Persistance.Migrations
 
             modelBuilder.Entity("KodlamaIoDevs.Domain.Entities.SocialMedia", b =>
                 {
-                    b.HasOne("KodlamaIoDevs.Domain.Entities.UserApp", "UserApp")
-                        .WithMany("SocialMedias")
-                        .HasForeignKey("UserAppId");
+                    b.HasOne("Core.Security.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("UserApp");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("KodlamaIoDevs.Domain.Entities.Technology", b =>
@@ -323,15 +327,6 @@ namespace KodlamaIoDevs.Persistance.Migrations
                     b.Navigation("ProgrammingLanguage");
                 });
 
-            modelBuilder.Entity("KodlamaIoDevs.Domain.Entities.UserApp", b =>
-                {
-                    b.HasOne("Core.Security.Entities.User", null)
-                        .WithOne()
-                        .HasForeignKey("KodlamaIoDevs.Domain.Entities.UserApp", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Core.Security.Entities.User", b =>
                 {
                     b.Navigation("RefreshTokens");
@@ -342,11 +337,6 @@ namespace KodlamaIoDevs.Persistance.Migrations
             modelBuilder.Entity("KodlamaIoDevs.Domain.Entities.ProgrammingLanguage", b =>
                 {
                     b.Navigation("Technologies");
-                });
-
-            modelBuilder.Entity("KodlamaIoDevs.Domain.Entities.UserApp", b =>
-                {
-                    b.Navigation("SocialMedias");
                 });
 #pragma warning restore 612, 618
         }

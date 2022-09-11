@@ -12,6 +12,10 @@ namespace KodlamaIoDevs.Application.Features.SocialMedia.Commands.UpdateSocialMe
             RuleFor(g => g.Url)
                 .NotNull()
                 .NotEmpty();
+
+            RuleFor(g => g.UserId)
+                .NotNull()
+                .NotEmpty();
         }
     }
 }

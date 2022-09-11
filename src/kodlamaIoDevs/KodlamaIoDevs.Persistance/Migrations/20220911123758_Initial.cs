@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KodlamaIoDevs.Persistance.Migrations
 {
-    public partial class AddUserSocialMediaTables : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,19 @@ namespace KodlamaIoDevs.Persistance.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OperationClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProgrammingLanguages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProgrammingLanguages", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,6 +52,26 @@ namespace KodlamaIoDevs.Persistance.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Technologies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProgrammingLanguageId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Technologies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Technologies_ProgrammingLanguages_ProgrammingLanguageId",
+                        column: x => x.ProgrammingLanguageId,
+                        principalTable: "ProgrammingLanguages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,19 +102,23 @@ namespace KodlamaIoDevs.Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserApp",
+                name: "SocialMedia",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserApp", x => x.Id);
+                    table.PrimaryKey("PK_SocialMedia", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserApp_Users_Id",
-                        column: x => x.Id,
+                        name: "FK_SocialMedia_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,25 +147,38 @@ namespace KodlamaIoDevs.Persistance.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "SocialMedia",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "OperationClaims",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    UserAppId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SocialMedia", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SocialMedia_UserApp_UserAppId",
-                        column: x => x.UserAppId,
-                        principalTable: "UserApp",
-                        principalColumn: "Id");
+                    { 1, "Admin" },
+                    { 2, "User" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "ProgrammingLanguages",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Javascript" },
+                    { 2, "C#" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Technologies",
+                columns: new[] { "Id", "Name", "ProgrammingLanguageId" },
+                values: new object[] { 1, "Angular", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Technologies",
+                columns: new[] { "Id", "Name", "ProgrammingLanguageId" },
+                values: new object[] { 2, "ReactJS", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Technologies",
+                columns: new[] { "Id", "Name", "ProgrammingLanguageId" },
+                values: new object[] { 3, "EntityFramework", 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RefreshToken_UserId",
@@ -136,9 +186,14 @@ namespace KodlamaIoDevs.Persistance.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SocialMedia_UserAppId",
+                name: "IX_SocialMedia_UserId",
                 table: "SocialMedia",
-                column: "UserAppId");
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Technologies_ProgrammingLanguageId",
+                table: "Technologies",
+                column: "ProgrammingLanguageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserOperationClaims_OperationClaimId",
@@ -160,10 +215,13 @@ namespace KodlamaIoDevs.Persistance.Migrations
                 name: "SocialMedia");
 
             migrationBuilder.DropTable(
+                name: "Technologies");
+
+            migrationBuilder.DropTable(
                 name: "UserOperationClaims");
 
             migrationBuilder.DropTable(
-                name: "UserApp");
+                name: "ProgrammingLanguages");
 
             migrationBuilder.DropTable(
                 name: "OperationClaims");
